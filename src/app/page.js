@@ -1,103 +1,113 @@
-import Image from "next/image";
+"use client";
+import React, { useState } from "react";
+import Link from "next/link";
+import { Sun, Moon } from "lucide-react";
+import WebCall from "@/app/WebCall/page";
+import YoutubeDubbing from "@/app/YoutubeVideo/page";
+import LiveDubb from "@/app/LiveDubb/page";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [darkMode, setDarkMode] = useState(false);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  return (
+    <div className={`relative h-screen w-full ${darkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-black"}`}>
+      {/* Navbar */}
+      <nav
+        className={`fixed top-0 left-0 w-full h-16 ${darkMode ? "bg-black/50 text-white" : "bg-white/50 text-black"} 
+        backdrop-blur-md flex justify-between items-center px-[10%] transition-all duration-300`}
+      >
+        <div className="text-lg font-bold">CrossTalk</div>
+
+        <div className="flex space-x-6">
+          <div className="text-lg font-semibold">Home</div>
+          <div className="text-lg font-semibold">About</div>
+          <div className="text-lg font-semibold">Contact</div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+
+        <div className="flex items-center space-x-4">
+          <input
+            type="text"
+            placeholder="Search..."
+            className={`px-4 py-1 rounded-lg border focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+              darkMode ? "bg-gray-800 text-white border-gray-600" : "bg-white border-gray-300"
+            }`}
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          <button
+            onClick={() => setDarkMode(!darkMode)}
+            className="p-2 rounded-full transition-all duration-300"
+          >
+            {darkMode ? <Sun size={24} /> : <Moon size={24} />}
+          </button>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <div className="pt-20 text-center">
+        <h1 className="text-6xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+          Cross<span className="text-white">Talk</span>
+        </h1>
+      </div>
+
+      <section className="hero text-center p-10 mt-5">
+        <h2 className="text-3xl font-semibold">Break Language Barriers</h2>
+        <p className="text-lg text-gray-300">
+          (Real-time translation for video calls, YouTube, and more...)
+        </p>
+      </section>
+
+      {/* Cards Section */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-10 mx-auto max-w-5xl">
+        {[
+          {
+            title: "WebCall Live Translator",
+            description: "Translate speech in real-time during live video calls.",
+            link: "/WebCall",
+            color: "from-purple-600 to-indigo-700",
+          },
+          {
+            title: "YouTube Video Translator",
+            description: "Convert YouTube video audio into your preferred language.",
+            link: "/YoutubeVideo",
+            color: "from-green-600 to-teal-700",
+          },
+          {
+            title: "Stream Dubbing",
+            description: "Translate text into multiple languages instantly.",
+            link: "/LiveDubb",
+            color: "from-blue-600 to-cyan-700",
+          },
+          {
+            title: "Video Dubbing",
+            description: "Translate text into multiple languages instantly.",
+            link: "/machinetrans",
+            color: "from-blue-600 to-cyan-700",
+          },
+          {
+            title: "Movie Dubbing",
+            description: "Translate text into multiple languages instantly.",
+            link: "/machinetrans",
+            color: "from-blue-600 to-cyan-700",
+          },
+          {
+            title: "Audio Dubbing",
+            description: "Convert written text into natural-sounding speech.",
+            link: "/tts",
+            color: "from-red-600 to-pink-700",
+          },
+        ].map((item, index) => (
+          <div
+            key={index}
+            className={`bg-gradient-to-r ${item.color} p-6 rounded-lg shadow-lg hover:scale-105 transition-transform`}
+          >
+            <h3 className="text-xl text-yellow-300">{item.title}</h3>
+            <p className="text-gray-300">{item.description}</p>
+            <Link href={item.link} className="mt-4 inline-block bg-yellow-500 px-4 py-2 rounded hover:bg-yellow-400">
+  Start
+</Link>
+
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
